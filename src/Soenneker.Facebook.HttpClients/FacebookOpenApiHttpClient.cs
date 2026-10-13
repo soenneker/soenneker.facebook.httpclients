@@ -27,7 +27,7 @@ public sealed class FacebookOpenApiHttpClient : IFacebookOpenApiHttpClient
     {
         return _httpClientCache.Get(nameof(FacebookOpenApiHttpClient), (config: _config, baseUrl: _config["Facebook:ClientBaseUrl"] ?? _prodBaseUrl), static state =>
         {
-            var apiKey = state.config.GetValueStrict<string>("Facebook:AccessToken");
+            var apiKey = state.config.GetStringStrict("Facebook:AccessToken");
             string authHeaderName = state.config["Facebook:AuthHeaderName"] ?? "Authorization";
             string authHeaderValueTemplate = state.config["Facebook:AuthHeaderValueTemplate"] ?? "Bearer {token}";
             string authHeaderValue = authHeaderValueTemplate.Replace("{token}", apiKey, StringComparison.Ordinal);
